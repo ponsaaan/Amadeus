@@ -1,0 +1,39 @@
+version: '3.6'
+
+volumes:
+  mysql-data:
+    driver: local
+
+services:
+  amadeus:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./:/go/amadeus
+    ports:
+      - "80:80"
+      - "2345:2345"
+    security_opt:
+      - apparmor:unconfined
+    cap_add:
+      - SYS_PTRACE
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - mysql
+    command: local
+  mysql:
+    image: mysql:8.0
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=amadeus
+    volumes:
+      - mysql-data:/var/lib/mysql
+      # データベースの文字コードを utf8mb4 に統一するために指定する
+      - ./db/config/my.cnf:/etc/mysql/conf.d/my.cnf
+      # initdb.d の実行順はアルファベット順
+      # https://tech.mokelab.com/infra/docker/images/mysql/initdb.html
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci

@@ -1,0 +1,9 @@
+.github/
+.git/
+.env*
+examples/
+service_account.json
+docker-compose*
+Dockerfile*
+.dockerignore
+tmp/

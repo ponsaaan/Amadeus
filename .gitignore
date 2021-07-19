@@ -1,15 +1,17 @@
-# Binaries for programs and plugins
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
+cover.out
+cover.html
 
-# Test binary, built with `go test -c`
-*.test
+config/development.toml
+config/production.toml
 
-# Output of the go coverage tool, specifically when used with LiteIDE
-*.out
+.env*
+.envrc
 
-# Dependency directories (remove the comment below to include it)
-# vendor/
+main
+service_account.json
+
+*.DS_Store
+**/.DS_Store
+
+# delve
+/tmp/*

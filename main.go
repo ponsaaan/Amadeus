@@ -1,6 +1,8 @@
 package main
 
 import (
+	"github.com/labstack/gommon/log"
+	"github.com/ponsaaan/Amadeus.git/app/presentation"
 	"time"
 )
 
@@ -10,4 +12,7 @@ func init() {
 
 func main() {
 	println("Hello Amadeus!")
+	r := presentation.Router()
+	r.Logger.SetLevel(log.DEBUG)
+	r.Logger.Fatal(r.Start(":80"))
 }

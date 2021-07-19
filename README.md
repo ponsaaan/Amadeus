@@ -1,2 +1,4 @@
 # Amadeus
-Twitterで世界を救う
+`make up`
+
+`make build` if you did not build the image.
